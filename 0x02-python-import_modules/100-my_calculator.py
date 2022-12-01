@@ -1,47 +1,49 @@
 #!/usr/bin/python3
 
-if __name__ == "__main__":
+from sys import argv
 
-    import sys
+from calculator_1 import add, sub, mul, div
 
-    from calculator_1 import add, sub, mul, div
+if __name__ != "__main__":
 
-    argv = sys.argv[1:]
+        exit()
 
-    argv_count = len(argv)
 
-    operators = ["+", "-", "*", "/"]
 
-    if argv_count is not 3:
+        argc = len(argv) - 1
 
-            print("Usage: ./100-my_calculator.py <a> <operator> <b>")
+        if argc != 3:
 
-                exit(1)
+                print("Usage: {:s} <a> <operator> <b>".format(argv[0]))
 
-            elif sys.argv[2] not in operators:
+                    exit(1)
 
-                    print("Unknown operator. Available operators: +, -, * and /")
+                elif argv[2] == '+':
 
-                        exit(1)
+                        func = add
 
-                    else:
+                    elif argv[2] == '-':
 
-                            a = int(sys.argv[1])
+                            func = sub
 
-                                b = int(sys.argv[3])
+                        elif argv[2] == '*':
 
-                                    if sys.argv[2] is "+":
+                                func = mul
 
-                                                print("{:d} + {:d} = {:d}".format(a, b, add(a, b)))
+                            elif argv[2] == '/':
 
-                                                    elif sys.argv[2] is "-":
+                                    func = div
 
-                                                                print("{:d} - {:d} = {:d}".format(a, b, sub(a, b)))
+                                else:
 
-                                                                    elif sys.argv[2] is "*":
+                                        print("Unknown operator. Available operators: +, -, *, and /")
 
-                                                                                print("{:d} * {:d} = {:d}".format(a, b, mul(a, b)))
+                                            exit(1)
 
-                                                                                    elif sys.argv[2] is "/":
 
-                                                                                                print("{:d} / {:d} = {:d}".format(a, b, div(a, b)))
+
+                                            result = func(int(argv[1]), int(argv[3]))
+
+                                            print("{:d} {:s} {:d} = {:d}".format(int(argv[1]),
+
+                                                    argv[2], int(argv[3]), result))
